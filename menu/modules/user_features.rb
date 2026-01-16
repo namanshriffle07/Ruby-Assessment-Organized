@@ -53,7 +53,7 @@ module UserFeatures
 
   def view_products
     Product.all.each do |p|
-      puts "Product ID:#{p.id} Name:#{p.name} Price:#{p.price} (#{p.quantity} available)"
+      puts "Product ID:#{p.id} Name:#{p.name} Price:#{p.price} (#{p.quantity} available) #{p.review}"
     end
   end
 end

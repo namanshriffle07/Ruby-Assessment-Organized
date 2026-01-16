@@ -39,6 +39,10 @@ class Product
     @quantity
   end
 
+  def review
+    @review
+  end
+
   def id=(id)
     @id = id
   end
@@ -58,16 +62,17 @@ class Product
   def initialize(id, name, price, quantity)
     
     if price < 0
-      raise "invalid prise"
+      puts "invalid prise"
     end
 
     if quantity < 0
-      raise "Invalid quantiti"
+      puts "Invalid quantiti"
     end
     @id = id
     @name = name
     @price = price
     @quantity = quantity
+    @review = "All good"
   end
 
   def available?

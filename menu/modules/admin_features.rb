@@ -35,8 +35,17 @@ module AdminFeatures
       price = price.to_i
       qty = qty.to_i
       if !name.match?(/^\d+$/)
-        Product.add(Product.new(id, name, price, qty))
-        puts "Product added successfully"
+        if price<=0 || qty<=0
+          if price <= 0
+            puts "Please enter a valid price"
+          end
+          if qty <=0
+            puts "Please enter a valid product quantity"
+          end
+        else
+          Product.add(Product.new(id, name, price, qty))
+          puts "Product added successfully"
+        end
       else
         puts "Product name can't be number : "
       end
@@ -57,10 +66,19 @@ module AdminFeatures
       product_price = product_price.to_f
       product_quantity = product_quantity.to_i
 
-      product = Product.find(product_id)
-      product.price = product_price
-      product.quantity = product_quantity
-      puts "Product successfully updated"
+      if product_price <= 0 || product_id <= 0    
+        if product_price <= 0
+          puts "Please enter a valid product price"
+        end
+        if product_id <= 0
+          puts "Please enter a valid product id"
+        end
+      else 
+        product = Product.find(product_id)
+        product.price = product_price
+        product.quantity = product_quantity
+        puts "Product successfully updated"
+      end 
     else
       puts "Invalid product details"
     end
