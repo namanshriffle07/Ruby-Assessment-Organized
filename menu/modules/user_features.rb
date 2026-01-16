@@ -3,8 +3,10 @@ require_relative('../modal/user')
 
 module UserFeatures
   def user_menu(user)
+
     cart = Cart.new
     loop do
+      puts "User type : #{user.usertype}"
       puts "\n1. View Products\n2. Add to Cart\n3. View Cart\n4. Checkout\n5. View Orders\n6. Sign Out"
       case gets.to_i
       when 1

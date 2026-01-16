@@ -1,14 +1,11 @@
 require_relative('product')
 
 class Order
+  attr_reader :items
+
   def initialize(items)
-    @items = items
     @timestamp = Time.now
     @user = []
-  end
-
-  def items 
-    @items
   end
 
   def timestamp

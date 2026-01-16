@@ -1,4 +1,3 @@
 require('./menu/menu')
 
-app = Menu.new
-app.main_menu
+Menu.new.main_menu

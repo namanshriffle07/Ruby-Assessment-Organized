@@ -16,13 +16,19 @@ class User
     @@users.find { |u| u.email == email }
   end
   
-  def initialize(email, password)
+  def initialize(email, password,usertype)
     @email = email
     @password = password
+    @usertype = usertype
     @orders = []
   end
+
   def email
     @email
+  end
+
+  def usertype
+    @usertype
   end
 
   def orders

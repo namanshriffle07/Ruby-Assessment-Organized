@@ -1,5 +1,4 @@
 require_relative('../modal/user')
-require_relative('../modal/admin')
 
 module AuthFeatures
   def signup
@@ -10,7 +9,7 @@ module AuthFeatures
 
     valid = validate_email(email) && validate_password(password)
     if valid
-      User.add(User.new(email, password))
+      User.add(User.new(email, password,"Normal User"))
       @usr.sign_up(email,password)
     end
     if !validate_email(email)
@@ -22,6 +21,11 @@ module AuthFeatures
   end
 
   def signin
+    File.readlines("credential.txt").each do |line|
+      username, password = line.strip.split("=")
+      User.add(User.new(username, password,"User"))
+    end
+
     print "Email: "
     email = gets.chomp
     print "Password: "
@@ -52,11 +56,10 @@ module AuthFeatures
     exist = User.find(email)
 
     valid = validate_email(email) && validate_password(password)
-
+    
     if valid
       if !exist
-      
-        User.add(Admin.new(email, password))
+        User.add(User.new(email, password,"Admin"))
         @admin_auth.sign_up(email, password)
         puts "Admin created successfully\nEmail : #{email}"
       end
@@ -78,9 +81,16 @@ module AuthFeatures
     print "Password: "
     password = gets.chomp
 
+    File.readlines("admin.txt").each do |line|
+      username, password = line.strip.split("=")
+      User.add(User.new(username, password,"Admin"))
+    end
+
+
     if validate_email(email) && validate_password(password)
-      if @admin_auth.login(email, password)
-        admin_menu
+      if @admin_auth.login(email, password) 
+        usr = User.find(email)
+        admin_menu(usr)
       end
     end
     if !validate_email(email)

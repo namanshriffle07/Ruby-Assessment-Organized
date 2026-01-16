@@ -29,7 +29,7 @@ class Menu
       password = gets.chomp
       valid = validate_email(email) && validate_password(password)
       if valid
-        User.add(User.new(email, password))
+        User.add(User.new(email, password,"Admin user"))
         @admin_auth.sign_up(email,password)
       end
       if !validate_email(email)

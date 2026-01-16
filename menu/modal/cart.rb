@@ -1,3 +1,4 @@
+require 'debug/prelude'
 require_relative('order')
 require_relative('product')
 
@@ -18,20 +19,18 @@ class Cart
     @items.empty?
   end
 
-  def total
-    @items.sum { |product, qty| product.price * qty }
-  end
-
   def checkout
-    @totalamt = 0
-    @items.each do |product, qty|
+    totalamt = 0
+    @items.each do |product,qty|
+      puts "Product Name: #{product.name} Price: #{product.price} Quantity: #{qty} Total amount : #{product.price*qty}"
       amt = product.price * qty
-      @totalamt += amt
+      totalamt += amt
       product.quantity -= qty
     end
+    binding.break
     order = Order.new(@items.clone)
     @items.clear
-    puts "Total amount : #{@totalamt}"
+    puts "Total amount : #{totalamt}"
     order
   end
 

@@ -1,8 +1,9 @@
 require_relative('../modal/product')
 
 module AdminFeatures
-  def admin_menu
+  def admin_menu(usr)
     loop do
+      puts "User type : #{usr.usertype}"
       puts "\n1. Add Product\n2. Update Product\n3. Delete Product\n4. View Products\n5. Sign Out"
       case gets.to_i
       when 1
